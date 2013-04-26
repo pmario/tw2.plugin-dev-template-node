@@ -1,0 +1,11 @@
+title: HelloWorld
+modifier: PMario
+
+!Test the dummy plugin
+<<helloWorldButton>>
+
+!ExternalScripts
+Edit the ExternalScripts tiddler!
+
+!Info about Licenses
+[[Usefull Links]]
