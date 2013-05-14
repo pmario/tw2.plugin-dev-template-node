@@ -2,7 +2,7 @@
 |''Name''|LoadExternalScripts.js|
 |''Description''|Loads external plugins on startup|
 |''Author''|Tobias Beer|
-|''Version''|0.1.2 (2010-10-05)|
+|''Version''|0.1.3 (2010-10-05)|
 |''Status''|beta|
 |''Source''|http://tobibeer.tiddlyspace.com/#LoadExternalScripts.js|
 |''Documentation''|http://tobibeer.tiddlyspace.com/#LoadExternal|
@@ -10,13 +10,14 @@
 |''Contributions''|Codebase and original idea [[Saq Imtiaz|http://groups.google.com/group/TiddlyWikiDev/browse_thread/thread/7417b8332ad23a10/4ff4fa43141a20e6]]  as documented [[here|http://tiddlywiki.org/wiki/Dev:Developing_and_Testing_a_Plugin#The_Comprehensive_Method]] |
 |''~CoreVersion''|2.5.3|
 |''Type''|external script|
-!Code
+! Info 
+* modified by pmario
+** removed the window.loadPlugins hijack functions and use "onStartup" instead.
+** "startup" signal is created by the core! see: main()
+** removed TiddlyWiki.prototype stuff, because not needed. 
+! Code
 ***/
 //{{{
-TiddlyWiki.prototype.isTiddler = function (title) {
-    return store.tiddlerExists(title) || store.isShadowTiddler(title);
-}
-
 function loadExternal() {
     var fail = '',
         slash = true,
@@ -25,7 +26,7 @@ function loadExternal() {
         dir = loc.lastIndexOf("\\"),
         code, name, path, j, js;
 
-    if (!store.isTiddler(t)) return;
+    if (!store.tiddlerExists(t) && !store.isShadowTiddler(t)) return;
 
     if (dir == -1) {
         dir = loc.lastIndexOf("/");
@@ -61,55 +62,6 @@ function loadExternal() {
     } // if fail
 }
 
-loadPluginsEXT = window.loadPlugins;
-
-window.loadPlugins = function () {
-    loadPluginsEXT.apply(this, arguments);
-    loadExternal.apply(this, arguments);
-}
-
-//FIX: to handle shadows
-TiddlyWiki.prototype.getTiddlerText = function (title, defaultText) {
-    if (!title)
-        return defaultText;
-    var pos = title.indexOf(config.textPrimitives.sectionSeparator);
-    var section = null;
-    if (pos != -1) {
-        section = title.substr(pos + config.textPrimitives.sectionSeparator.length);
-        title = title.substr(0, pos);
-    }
-    pos = title.indexOf(config.textPrimitives.sliceSeparator);
-    if (pos != -1) {
-        var slice = this.getTiddlerSlice(title.substr(0, pos), title.substr(pos + config.textPrimitives.sliceSeparator.length));
-        if (slice)
-            return slice;
-    }
-
-    var tiddler = this.fetchTiddler(title);
-
-    //FIX: new variable 'text' for tiddler.text
-    var text = tiddler ? tiddler.text : (this.isShadowTiddler(title) ? this.getShadowTiddlerText(title) : null);
-
-    //check for text to get sections of shadows as well
-    if (text) {
-        if (!section) return text;
-        var re = new RegExp("(^!{1,6}[ \t]*" + section.escapeRegExp() + "[ \t]*\n)", "mg");
-        re.lastIndex = 0;
-        var match = re.exec(text);
-        if (match) {
-            var t = text.substr(match.index + match[1].length);
-            var re2 = /^!/mg;
-            re2.lastIndex = 0;
-            match = re2.exec(t); //# search for the next heading
-            if (match)
-                t = t.substr(0, match.index - 1); //# don't include final \n
-            return t;
-        }
-        return defaultText;
-    }
-    if (defaultText != undefined)
-        return defaultText;
-    return null;
-};
+jQuery(document).on("startup", function(){loadExternal()})
 
 //}}}

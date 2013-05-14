@@ -1,5 +1,5 @@
-! section heading
+! sectionName
 some text
 some more text
 
-slice: some slice text
+sliceName: some slice text
