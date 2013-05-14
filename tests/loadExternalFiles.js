@@ -2,9 +2,9 @@
 |''Name''|LoadExternalFiles.js|
 |''Description''|Loads external files as shadow tiddler on startup|
 |''Author''|Mario Pietsch|
-|''Version''|0..0.1|
-|''Status''|alpha|
-|''Source''||
+|''Version''|0.0.2|
+|''Status''|beta|
+|''Source''|https://github.com/pmario/tw2.plugin-dev-template-node/tree/master/tests|
 |''Documentation''||
 |''License''|[[Creative Commons Attribution-ShareAlike 2.5 License|http://creativecommons.org/licenses/by-sa/2.5/]]|
 |''Contributions''|based on: http://tobibeer.tiddlyspace.com/#LoadExternal|
@@ -18,7 +18,7 @@
 ! Code
 ***/
 //{{{
-function loadExternalFile() {
+function loadExternalFiles() {
     var fail = '',
         slash = true,
         t = "ExternalFiles",
@@ -56,6 +56,6 @@ function loadExternalFile() {
     } // if fail
 }
 
-jQuery(document).on("startup", function(){loadExternalFile()})
+jQuery(document).on("startup", function(){loadExternalFiles()})
 
 //}}}

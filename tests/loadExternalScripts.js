@@ -1,13 +1,13 @@
 /***
 |''Name''|LoadExternalScripts.js|
 |''Description''|Loads external plugins on startup|
-|''Author''|Tobias Beer|
-|''Version''|0.1.3 (2010-10-05)|
+|''Author''|Mario Pietsch|
+|''Version''|0.2.0|
 |''Status''|beta|
-|''Source''|http://tobibeer.tiddlyspace.com/#LoadExternalScripts.js|
-|''Documentation''|http://tobibeer.tiddlyspace.com/#LoadExternal|
+|''Source''|https://github.com/pmario/tw2.plugin-dev-template-node/tree/master/tests|
+|''Documentation''||
 |''License''|[[Creative Commons Attribution-ShareAlike 2.5 License|http://creativecommons.org/licenses/by-sa/2.5/]]|
-|''Contributions''|Codebase and original idea [[Saq Imtiaz|http://groups.google.com/group/TiddlyWikiDev/browse_thread/thread/7417b8332ad23a10/4ff4fa43141a20e6]]  as documented [[here|http://tiddlywiki.org/wiki/Dev:Developing_and_Testing_a_Plugin#The_Comprehensive_Method]] |
+|''Contributions''|based on: http://tobibeer.tiddlyspace.com/#LoadExternal|
 |''~CoreVersion''|2.5.3|
 |''Type''|external script|
 ! Info 
@@ -18,7 +18,7 @@
 ! Code
 ***/
 //{{{
-function loadExternal() {
+function loadExternalScripts() {
     var fail = '',
         slash = true,
         t = "ExternalScripts",
@@ -62,6 +62,6 @@ function loadExternal() {
     } // if fail
 }
 
-jQuery(document).on("startup", function(){loadExternal()})
+jQuery(document).on("startup", function(){loadExternalScripts()})
 
 //}}}
