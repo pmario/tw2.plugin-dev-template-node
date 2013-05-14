@@ -1,15 +1,15 @@
 /***
-|''Name''|LoadExternalScripts.js|
-|''Description''|Loads external plugins on startup|
-|''Author''|Tobias Beer|
-|''Version''|0.1.2 (2010-10-05)|
-|''Status''|beta|
-|''Source''|http://tobibeer.tiddlyspace.com/#LoadExternalScripts.js|
-|''Documentation''|http://tobibeer.tiddlyspace.com/#LoadExternal|
+|''Name''|LoadExternalFiles.js|
+|''Description''|Loads external files as shadow tiddler on startup|
+|''Author''|Mario Pietsch|
+|''Version''|0..0.1|
+|''Status''|alpha|
+|''Source''||
+|''Documentation''||
 |''License''|[[Creative Commons Attribution-ShareAlike 2.5 License|http://creativecommons.org/licenses/by-sa/2.5/]]|
-|''Contributions''|Codebase and original idea [[Saq Imtiaz|http://groups.google.com/group/TiddlyWikiDev/browse_thread/thread/7417b8332ad23a10/4ff4fa43141a20e6]]  as documented [[here|http://tiddlywiki.org/wiki/Dev:Developing_and_Testing_a_Plugin#The_Comprehensive_Method]] |
+|''Contributions''|based on: http://tobibeer.tiddlyspace.com/#LoadExternal|
 |''~CoreVersion''|2.5.3|
-|''Type''|external script|
+|''Type''|external file|
 !Code
 ***/
 //{{{
@@ -17,10 +17,10 @@ TiddlyWiki.prototype.isTiddler = function (title) {
     return store.tiddlerExists(title) || store.isShadowTiddler(title);
 }
 
-function loadExternal() {
+function loadExternalFile() {
     var fail = '',
         slash = true,
-        t = "ExternalScripts",
+        t = "ExternalFiles",
         loc = getLocalPath(document.location.toString()),
         dir = loc.lastIndexOf("\\"),
         code, name, path, j, js;
@@ -40,13 +40,13 @@ function loadExternal() {
             fail += path + name + '\n';
             continue;
         }
-        try {
-            eval(code);
-        } catch (e) {
-            fail = name + ': ' + e;
-            break;
-        }
-        displayMessage('External Plugins: ' + name + ' loaded!')
+        //~ try {
+            //~ eval(code);
+        //~ } catch (e) {
+            //~ fail = name + ': ' + e;
+            //~ break;
+        //~ }
+        displayMessage('External File: ' + name + ' loaded!')
         dir = name.lastIndexOf("\\");
         name = (dir >= 0 ? name.substr(dir + 1) : name);
         dir = name.lastIndexOf("\/");
@@ -56,16 +56,16 @@ function loadExternal() {
         config.shadowTiddlers[name] = code;
     } // for (j = 0 ..
     if (fail) { 
-        confirm('Failed to load the following external plugins as defined in your ' + 
+        confirm('Failed to load the following external files as defined in your ' + 
             t + '...\n' + fail);
     } // if fail
 }
 
-loadPluginsEXT = window.loadPlugins;
+loadFilesEXT = window.loadPlugins;
 
 window.loadPlugins = function () {
-    loadPluginsEXT.apply(this, arguments);
-    loadExternal.apply(this, arguments);
+    loadFilesEXT.apply(this, arguments);
+    loadExternalFile.apply(this, arguments);
 }
 
 //FIX: to handle shadows
