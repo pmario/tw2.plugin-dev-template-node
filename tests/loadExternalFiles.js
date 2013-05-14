@@ -5,16 +5,27 @@
 |''Version''|0.0.2|
 |''Status''|beta|
 |''Source''|https://github.com/pmario/tw2.plugin-dev-template-node/tree/master/tests|
-|''Documentation''||
 |''License''|[[Creative Commons Attribution-ShareAlike 2.5 License|http://creativecommons.org/licenses/by-sa/2.5/]]|
 |''Contributions''|based on: http://tobibeer.tiddlyspace.com/#LoadExternal|
 |''~CoreVersion''|2.5.3|
 |''Type''|external file|
-* ! Info 
+! Documentation
+<<<
+If this extension is used as a plugin, you need to create a tiddler named: ExternalFiles
+This tiddler needs to contain a list of external files, that should be loaded as shadow tiddlers.
+eg:
+{{{
+./tests/content/SampleText.txt
+./tests/content/SampleFile.sh
+}}}
+<<<
+!!! Info 
+<<<
 * modified by pmario
 ** removed the window.loadPlugins hijack functions and use "onStartup" instead.
 ** "startup" signal is created by the core! see: main()
 ** removed TiddlyWiki.prototype stuff, because not needed. 
+<<<
 ! Code
 ***/
 //{{{
