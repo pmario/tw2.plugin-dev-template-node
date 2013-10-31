@@ -34,7 +34,10 @@ else
   NAME=upstream 
 fi
 
-node $TIDDLYWIKI5_DIR/tiddlywiki.js $TIDDLYWIKI5_DIR/editions/tw2 --verbose --load ./$NAME.html.recipe --savetiddler $:/core/templates/tiddlywiki2.template.html $TIDDLYWIKI_DEST/$NAME.html text/plain
+node $TIDDLYWIKI5_DIR/tiddlywiki.js $TIDDLYWIKI5_DIR/editions/tw2 \
+	--verbose \
+	--load ./$NAME.html.recipe \
+	--new_rendertiddler $:/core/templates/tiddlywiki2.template.html $TIDDLYWIKI_DEST/$NAME.html text/plain
 
 # open the file
 #`cat OPEN_COMMAND` $NAME.html

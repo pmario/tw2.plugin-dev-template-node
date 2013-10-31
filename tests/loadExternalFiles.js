@@ -9,6 +9,9 @@
 |''Contributions''|based on: http://tobibeer.tiddlyspace.com/#LoadExternal|
 |''~CoreVersion''|2.5.3|
 |''Type''|external file|
+! DEPRECATED
+* Use ajaxLoadExternalFiles.js instead. (core min version: 2.7.1)
+* It's kept, because it works with core 2.5.3 
 ! Documentation
 <<<
 If this extension is used as a plugin, you need to create a tiddler named: ExternalFiles

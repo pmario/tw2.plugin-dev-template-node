@@ -1,0 +1,37 @@
+title: ExternalFilesConfig
+modifier: PMario
+
+! Config
+host: http://localhost:49153/
+list: ServerFileList
+log: verbose
+
+! Documentation
+This tiddler contains the "host" and "list" configuration for [[ajaxLoadExternalFiles.js]]
+''host''
+<<<
+Contains the URL, where the files should be loaded. It should be the same URL where your TW.html file comes from. If it is a different location, the browser may block access because of "Same Origin Policy"
+
+eg: http://localhost:49153/
+or: http://example.com/
+
+''Important:'' There must be a trailing slash ''/''!
+
+<<<
+''list''
+<<<
+Is a filename. This file needs to contain a lists of files that should be loaded from the server. If the ServerFileList doesn't exit on the server, the ExternalFiles tiddler will be used as a fallback option. If ServerFileList exists ExternalFiles will be ignored! For a long list, this mechanism will create a lot of single file requests and may take some time!
+
+eg: ServerFileList ... host + list will be ... http://example.com/ServerFileList
+or: test/ServerFileList ... host + list will be ... http://example.com/test/ServerFileList
+<<<
+''log'' level
+<<<
+If log level is not defined, "count" will be used!
+
+verbose .. (default) Show files loaded and error messages.
+error .. Show errors only
+count .. Show number of files, that should be loaded.See: ServerFileList 
+none .. not supported atm
+<<<
+

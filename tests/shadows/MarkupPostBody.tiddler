@@ -1,6 +1,6 @@
 <div title="MarkupPostBody" modifier="PMario" created="201002202000">
 <pre><!--{{{-->
-<script src="./tests/loadExternalFiles.js" language="javascript" type="text/javascript"></script> 
+<script src="./tests/ajaxLoadExternalFiles.js" language="javascript" type="text/javascript"></script> 
 <script src="./tests/loadExternalScripts.js" language="javascript" type="text/javascript"></script> 
 <!--}}}-->
 </pre>

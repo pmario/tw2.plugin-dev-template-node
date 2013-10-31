@@ -1,4 +1,4 @@
 title: ExternalFiles
 modifier: PMario
 
-./tests/content/SampleText.txt
+tests/content/SampleText.txt
